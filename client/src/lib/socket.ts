@@ -18,7 +18,9 @@ class SocketManager {
     }
 
     const protocol = window.location.protocol === "https:" ? "wss:" : "ws:";
-    const wsUrl = `${protocol}//${window.location.host}/ws`;
+    const host = window.location.hostname;
+    const port = import.meta.env.DEV ? "5000" : window.location.port;
+    const wsUrl = `${protocol}//${host}:${port}/ws`;
     
     console.log('Attempting WebSocket connection to:', wsUrl);
     this.ws = new WebSocket(wsUrl);

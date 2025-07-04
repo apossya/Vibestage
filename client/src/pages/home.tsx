@@ -7,70 +7,37 @@ import { Copy, Wifi, Clock, Zap, BarChart3, Monitor, Smartphone } from 'lucide-r
 import { useToast } from '@/hooks/use-toast';
 
 export default function Home() {
-  const [language, setLanguage] = useState<'en' | 'ru'>('en');
   const [qrData, setQrData] = useState<{ url: string; text: string } | null>(null);
   const { toast } = useToast();
 
   const texts = {
-    en: {
-      title: 'VibeStage',
-      subtitle: 'Interactive Presentation Platform',
-      heroTitle: 'Transform Your Presentations into',
-      heroHighlight: 'Interactive Shows',
-      heroDescription: 'VibeStage turns ordinary demo sessions into engaging experiences with real-time emoji reactions, live voting, and interactive timers.',
-      getStarted: 'Get Started Instantly',
-      scanQR: 'Scan the QR code with your mobile device to access the remote controller. Send live reactions, participate in polls, and engage with presentations in real-time.',
-      orVisit: 'Or visit directly:',
-      copy: 'Copy',
-      features: {
-        timer: {
-          title: 'Smart Timer',
-          description: '5-minute countdown with visual alerts and celebratory confetti when time\'s up.',
-        },
-        reactions: {
-          title: 'Live Reactions',
-          description: 'Send emoji reactions that fly across the screen with beautiful animations.',
-        },
-        polls: {
-          title: 'Interactive Polls',
-          description: 'Real-time audience voting with instant results and winner celebrations.',
-        },
+    title: 'VibeStage',
+    subtitle: 'Интерактивная платформа презентаций',
+    heroTitle: 'Превратите ваши презентации в',
+    heroHighlight: 'Интерактивные шоу',
+    heroDescription: 'VibeStage превращает обычные демо-сессии в увлекательные события с реакциями эмодзи в реальном времени, голосованиями и интерактивными таймерами.',
+    getStarted: 'Начните мгновенно',
+    scanQR: 'Отсканируйте QR-код мобильным устройством для доступа к пульту управления. Отправляйте реакции, участвуйте в опросах и взаимодействуйте с презентациями в реальном времени.',
+    orVisit: 'Или перейдите напрямую:',
+    copy: 'Копировать',
+    features: {
+      timer: {
+        title: 'Умный таймер',
+        description: '5-минутный обратный отсчёт с визуальными уведомлениями и праздничным конфетти по завершении.',
       },
-      launchHost: 'Launch Host Display',
-      openRemote: 'Open Remote Controller',
-      connected: 'Connected',
-    },
-    ru: {
-      title: 'VibeStage',
-      subtitle: 'Интерактивная платформа презентаций',
-      heroTitle: 'Превратите ваши презентации в',
-      heroHighlight: 'Интерактивные шоу',
-      heroDescription: 'VibeStage превращает обычные демо-сессии в увлекательные события с реакциями эмодзи в реальном времени, голосованиями и интерактивными таймерами.',
-      getStarted: 'Начните мгновенно',
-      scanQR: 'Отсканируйте QR-код мобильным устройством для доступа к пульту управления. Отправляйте реакции, участвуйте в опросах и взаимодействуйте с презентациями в реальном времени.',
-      orVisit: 'Или перейдите напрямую:',
-      copy: 'Копировать',
-      features: {
-        timer: {
-          title: 'Умный таймер',
-          description: '5-минутный обратный отсчёт с визуальными уведомлениями и праздничным конфетти по завершении.',
-        },
-        reactions: {
-          title: 'Живые реакции',
-          description: 'Отправляйте эмодзи-реакции, которые летят по экрану с красивыми анимациями.',
-        },
-        polls: {
-          title: 'Интерактивные опросы',
-          description: 'Голосование аудитории в реальном времени с мгновенными результатами и празднованием победителей.',
-        },
+      reactions: {
+        title: 'Живые реакции',
+        description: 'Отправляйте эмодзи-реакции, которые летят по экрану с красивыми анимациями.',
       },
-      launchHost: 'Запустить экран ведущего',
-      openRemote: 'Открыть пульт управления',
-      connected: 'Подключено',
+      polls: {
+        title: 'Интерактивные опросы',
+        description: 'Голосование аудитории в реальном времени с мгновенными результатами и празднованием победителей.',
+      },
     },
+    launchHost: 'Запустить экран ведущего',
+    openRemote: 'Открыть пульт управления',
+    connected: 'Подключено',
   };
-
-  const t = texts[language];
 
   useEffect(() => {
     fetch('/api/qr-data')
@@ -83,8 +50,8 @@ export default function Home() {
     if (qrData) {
       navigator.clipboard.writeText(qrData.url);
       toast({
-        title: language === 'en' ? 'Copied!' : 'Скопировано!',
-        description: language === 'en' ? 'Link copied to clipboard' : 'Ссылка скопирована в буфер обмена',
+        title: 'Скопировано!',
+        description: 'Ссылка скопирована в буфер обмена',
       });
     }
   };
@@ -99,21 +66,13 @@ export default function Home() {
               <div className="w-8 h-8 bg-gradient-to-br from-primary to-secondary rounded-lg flex items-center justify-center">
                 <Zap className="text-white w-4 h-4" />
               </div>
-              <h1 className="text-xl font-bold text-gray-900">{t.title}</h1>
+              <h1 className="text-xl font-bold text-gray-900">{texts.title}</h1>
             </div>
             
             <div className="flex items-center space-x-4">
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => setLanguage(language === 'en' ? 'ru' : 'en')}
-                className="flex items-center space-x-2"
-              >
-                <span className="text-sm font-medium">{language.toUpperCase()}</span>
-              </Button>
               <div className="flex items-center space-x-2">
                 <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-                <span className="text-sm text-gray-600">{t.connected}</span>
+                <span className="text-sm text-gray-600">{texts.connected}</span>
               </div>
             </div>
           </div>
@@ -124,13 +83,13 @@ export default function Home() {
         {/* Hero Section */}
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-gray-900 mb-4">
-            {t.heroTitle}{' '}
+            {texts.heroTitle}{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">
-              {t.heroHighlight}
+              {texts.heroHighlight}
             </span>
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            {t.heroDescription}
+            {texts.heroDescription}
           </p>
         </div>
 
@@ -139,14 +98,14 @@ export default function Home() {
           <CardContent className="p-8">
             <div className="grid md:grid-cols-2 gap-8 items-center">
               <div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">{t.getStarted}</h3>
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">{texts.getStarted}</h3>
                 <p className="text-gray-600 mb-6">
-                  {t.scanQR}
+                  {texts.scanQR}
                 </p>
                 
                 <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    {t.orVisit}
+                    {texts.orVisit}
                   </label>
                   <div className="flex items-center space-x-2">
                     <input
@@ -182,8 +141,8 @@ export default function Home() {
               <div className="w-12 h-12 bg-gradient-to-br from-primary to-secondary rounded-lg flex items-center justify-center mb-4">
                 <Clock className="text-white w-6 h-6" />
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">{t.features.timer.title}</h3>
-              <p className="text-gray-600">{t.features.timer.description}</p>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">{texts.features.timer.title}</h3>
+              <p className="text-gray-600">{texts.features.timer.description}</p>
             </CardContent>
           </Card>
           
@@ -192,8 +151,8 @@ export default function Home() {
               <div className="w-12 h-12 bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-lg flex items-center justify-center mb-4">
                 <span className="text-xl">🔥</span>
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">{t.features.reactions.title}</h3>
-              <p className="text-gray-600">{t.features.reactions.description}</p>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">{texts.features.reactions.title}</h3>
+              <p className="text-gray-600">{texts.features.reactions.description}</p>
             </CardContent>
           </Card>
           
@@ -202,8 +161,8 @@ export default function Home() {
               <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-lg flex items-center justify-center mb-4">
                 <BarChart3 className="text-white w-6 h-6" />
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">{t.features.polls.title}</h3>
-              <p className="text-gray-600">{t.features.polls.description}</p>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">{texts.features.polls.title}</h3>
+              <p className="text-gray-600">{texts.features.polls.description}</p>
             </CardContent>
           </Card>
         </div>
@@ -213,13 +172,13 @@ export default function Home() {
           <Link href="/host">
             <Button size="lg" className="mr-4">
               <Monitor className="w-5 h-5 mr-2" />
-              {t.launchHost}
+              {texts.launchHost}
             </Button>
           </Link>
           <Link href="/remote">
             <Button variant="secondary" size="lg">
               <Smartphone className="w-5 h-5 mr-2" />
-              {t.openRemote}
+              {texts.openRemote}
             </Button>
           </Link>
         </div>

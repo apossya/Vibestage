@@ -107,10 +107,15 @@ The application follows a modern full-stack architecture with real-time capabili
 ```
 Changelog:
 - July 04, 2025. Initial setup
+- July 04, 2025. Removed English language support (Russian only)
+- July 04, 2025. Added navigation buttons to return to home page from host and remote pages
+- July 04, 2025. Updated all UI text to Russian language
 ```
 
 ## User Preferences
 
 ```
 Preferred communication style: Simple, everyday language.
+Language: Russian only (English removed)
+Navigation: Home page navigation buttons on all sub-pages
 ```

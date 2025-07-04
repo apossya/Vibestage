@@ -53,9 +53,9 @@ export default function Timer({ onComplete, variant = 'host' }: TimerProps) {
   };
 
   const getStatusText = () => {
-    if (timeLeft === 0) return 'Time\'s up!';
-    if (isRunning) return 'Running...';
-    return 'Ready to start';
+    if (timeLeft === 0) return 'Время вышло!';
+    if (isRunning) return 'Идёт...';
+    return 'Готов к запуску';
   };
 
   return (
