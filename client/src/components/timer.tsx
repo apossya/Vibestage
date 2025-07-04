@@ -42,14 +42,14 @@ export default function Timer({ onComplete, variant = 'host' }: TimerProps) {
     if (variant === 'mobile') {
       return 'text-4xl font-bold text-gray-900 mb-2 font-mono';
     }
-    return 'text-8xl font-black text-white mb-4 font-mono tracking-wider';
+    return 'text-4xl sm:text-6xl md:text-8xl font-black text-white mb-4 font-mono tracking-wider';
   };
 
   const getContainerClasses = () => {
     if (variant === 'mobile') {
       return 'bg-white rounded-2xl shadow-lg p-6 border border-gray-100';
     }
-    return 'timer-glow bg-black/30 backdrop-blur-md rounded-3xl p-12 mb-8 border border-white/20';
+    return 'timer-glow bg-black/30 backdrop-blur-md rounded-2xl md:rounded-3xl p-6 md:p-12 mb-6 md:mb-8 border border-white/20';
   };
 
   const getStatusText = () => {
