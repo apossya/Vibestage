@@ -173,6 +173,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
             break;
 
           case 'confetti_cheat':
+            console.log('🎉 Cheat code received! Triggering confetti...');
             broadcastToHosts({
               type: 'trigger_confetti',
               data: { source: 'cheat' },

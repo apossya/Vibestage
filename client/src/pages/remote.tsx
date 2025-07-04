@@ -65,11 +65,14 @@ export default function Remote() {
     const targetSequence = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'KeyB', 'KeyA'];
     
     const handleKeyDown = (e: KeyboardEvent) => {
+      console.log('Key pressed:', e.code);
       const newSequence = [...cheatCode, e.code].slice(-targetSequence.length);
       setCheatCode(newSequence);
+      console.log('Current sequence:', newSequence);
       
       if (newSequence.length === targetSequence.length && 
           newSequence.every((key, i) => key === targetSequence[i])) {
+        console.log('🎉 Cheat code activated!');
         socketManager.send('confetti_cheat');
         setCheatCode([]);
       }
