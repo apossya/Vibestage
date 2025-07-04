@@ -60,8 +60,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
   let timerInterval: NodeJS.Timeout | null = null;
 
   function startTimer() {
-    if (timerState.isRunning) return;
+    if (timerState.isRunning) {
+      console.log('[Timer] Timer already running, ignoring start request');
+      return;
+    }
     
+    console.log('[Timer] Starting timer...');
     timerState.isRunning = true;
     timerState.startTime = Date.now();
     
@@ -102,10 +106,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   wss.on('connection', (ws, req) => {
     const clientId = generateClientId();
+    console.log(`[WebSocket] New connection: ${clientId}`);
     
     ws.on('message', (data) => {
       try {
         const message: SocketMessage = JSON.parse(data.toString());
+        console.log(`[WebSocket] Received message:`, message);
         
         switch (message.type) {
           case 'register':
@@ -134,6 +140,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
             break;
 
           case 'start_timer':
+            console.log(`[Timer] Starting timer requested by ${clientId}`);
             startTimer();
             break;
 

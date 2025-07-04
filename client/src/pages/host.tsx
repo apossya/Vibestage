@@ -63,7 +63,7 @@ export default function Host() {
           <div className="flex justify-between items-center">
             <div className="flex items-center space-x-4">
               <Link href="/">
-                <Button variant="outline" size="sm" className="text-white border-white/20 hover:bg-white/10">
+                <Button variant="outline" size="sm" className="text-white border-white/40 hover:bg-white/20 bg-black/20">
                   <Home className="w-4 h-4 mr-2" />
                   Главная
                 </Button>

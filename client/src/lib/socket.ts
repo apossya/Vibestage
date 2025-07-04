@@ -17,13 +17,18 @@ class SocketManager {
       return;
     }
 
-    const protocol = window.location.protocol === "https:" ? "wss:" : "ws:";
-    const host = window.location.hostname;
-    const port = import.meta.env.DEV ? "5000" : window.location.port;
-    const wsUrl = `${protocol}//${host}:${port}/ws`;
-    
-    console.log('Attempting WebSocket connection to:', wsUrl);
-    this.ws = new WebSocket(wsUrl);
+    // In development, connect directly to the backend port
+    if (import.meta.env.DEV) {
+      const wsUrl = `ws://localhost:5000/ws`;
+      console.log('Attempting WebSocket connection to:', wsUrl);
+      this.ws = new WebSocket(wsUrl);
+    } else {
+      // In production, use the same domain
+      const protocol = window.location.protocol === "https:" ? "wss:" : "ws:";
+      const wsUrl = `${protocol}//${window.location.host}/ws`;
+      console.log('Attempting WebSocket connection to:', wsUrl);
+      this.ws = new WebSocket(wsUrl);
+    }
 
     this.ws.onopen = () => {
       console.log('WebSocket connected successfully');
