@@ -239,7 +239,15 @@ export default function Remote() {
             </div>
             <h3 className="text-sm font-semibold text-gray-900 mb-2">{texts.cheatTitle}</h3>
             <p className="text-xs text-gray-600 mb-3">{texts.cheatDesc}</p>
-            <div className="text-xs text-yellow-600 font-medium">{texts.cheatHint}</div>
+            <div 
+              className="text-xs text-yellow-600 font-medium cursor-pointer hover:text-yellow-800 transition-colors"
+              onClick={() => {
+                console.log('🎉 Cheat code activated by click!');
+                socketManager.send('confetti_cheat');
+              }}
+            >
+              {texts.cheatHint}
+            </div>
           </div>
         </CardContent>
       </Card>
