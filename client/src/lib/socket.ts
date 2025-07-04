@@ -31,7 +31,7 @@ class SocketManager {
     }
 
     this.ws.onopen = () => {
-      console.log('WebSocket connected successfully');
+      console.log('✅ WebSocket connected successfully');
       this.reconnectAttempts = 0;
       
       // Register client type
@@ -54,7 +54,8 @@ class SocketManager {
     };
 
     this.ws.onerror = (error) => {
-      console.error('WebSocket error:', error);
+      console.error('❌ WebSocket error:', error);
+      console.error('WebSocket readyState:', this.ws?.readyState);
     };
   }
 
